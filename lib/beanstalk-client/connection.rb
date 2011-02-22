@@ -255,7 +255,7 @@ module Beanstalk
             @watch_list.each{|tube| @connections[addr].watch(tube)}
             to_ignore.each{|tube| @connections[addr].ignore(tube)}
           end
-        rescue Errno::ECONNREFUSED
+        rescue Errno::ECONNREFUSED, EOFError
           raise NotConnected
         rescue Exception => ex
           puts "#{ex.class}: #{ex}"
